@@ -1,11 +1,11 @@
 package com.arcade.gamerarcade.api;
 
+import com.arcade.dto.UserCreateDto;
 import com.arcade.gamerarcade.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,8 +15,8 @@ public class AuthApi {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public String signup(@RequestParam String username, @RequestParam String password) {
-        return authService.signup(username, password);
+    public ResponseEntity<?> signup(@RequestBody @Validated UserCreateDto userCreateDto) {
+        return ResponseEntity.ok(authService.signup(userCreateDto));
     }
 
     @PostMapping("/login")

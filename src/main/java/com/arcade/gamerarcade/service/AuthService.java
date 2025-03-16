@@ -1,6 +1,9 @@
 package com.arcade.gamerarcade.service;
 
+import com.arcade.dto.UserCreateDto;
+import com.arcade.dto.UserResponseDto;
 import com.arcade.gamerarcade.repo.UserRepository;
+import com.arcade.gamerarcade.service.user.UserService;
 import com.arcade.gamerarcade.validate.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,12 +18,13 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
 
-    public String signup(String username, String password) {
-        if (userRepository.findByUserName(username).isPresent()) {
+    public UserResponseDto signup(UserCreateDto userCreateDto) {
+        if (userRepository.findByUsername(userCreateDto.getUsername()).isPresent()) {
             throw new RuntimeException("User already exists");
         }
-        userService.registerUser(username, password);
-        return jwtUtil.generateToken(username);
+        UserResponseDto userResponseDto = userService.createUser(userCreateDto);
+        userResponseDto.setJwtToken(jwtUtil.generateToken(userResponseDto.getUsername()));
+        return userResponseDto;
     }
 
     public String login(String username, String password) {
