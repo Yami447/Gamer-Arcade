@@ -43,4 +43,13 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public UserResponseDto getUser(String username) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        if(userOptional.isEmpty()) {
+            throw new RuntimeException("USER NOT FOUND!");
+        }
+        User user = userOptional.get();
+        return UserMapper.INSTANCE.fromUser(user);
+    }
 }

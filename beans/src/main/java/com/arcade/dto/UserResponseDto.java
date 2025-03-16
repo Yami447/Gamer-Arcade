@@ -10,5 +10,6 @@ public class UserResponseDto {
     private String email;
     private String role;
     private List<String> games;
+    private List<String> friends;
     private String jwtToken;
 }

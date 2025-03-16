@@ -15,6 +15,10 @@ public class CollectionUtils {
         return c != null && c.size() > 0;
     }
 
+    public static <T> boolean checkIfPresent(Collection<T> c, T d) {
+        return (isNotEmpty(c) && c.contains(d));
+    }
+
     public static <K, V> boolean isEmpty(Map<K, V> m) {
         return !isNotEmpty(m);
     }

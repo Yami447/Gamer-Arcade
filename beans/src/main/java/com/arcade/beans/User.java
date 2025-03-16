@@ -6,10 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Document
 @Data
@@ -22,12 +19,12 @@ public class User {
     private String email;
     private String password;
     private String role;
-    private Set<String> games;
-    private List<Post> posts;
-    private List<Comment> comments;
-    private List<String> friends;
-    private List<String> pendingFriendRequests;
-    private List<String> sentFriendRequests;
-    private List<String> friendRecommendations;
+    private Set<String> games = new HashSet<>();
+    private List<Post> posts = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
+    private List<String> friends = new ArrayList<>();
+    private List<String> pendingFriendRequests = new ArrayList<>();
+    private List<String> sentFriendRequests = new ArrayList<>();
+    private List<String> friendRecommendations = new ArrayList<>();
     private Map<String, String> friendRecommendationByGame;
 }

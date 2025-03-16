@@ -17,4 +17,9 @@ public class UserApi {
         return ResponseEntity.ok(userService.updateUserProfileData(userProfileUpdateDto));
     }
 
+    @GetMapping("/username")
+    public ResponseEntity<?> getUserProfile(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUser(username));
+    }
+
 }
